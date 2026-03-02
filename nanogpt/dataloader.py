@@ -2,8 +2,8 @@ import logging
 
 import requests
 import torch
-from nanogpt.tokenizer import BaseTokenizer
 
+from nanogpt.tokenizer import BaseTokenizer
 from nanogpt.utils import setup_logging
 
 setup_logging()

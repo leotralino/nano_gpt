@@ -1,0 +1,13 @@
+[tool.ruff]
+# Match Karpathy's style (and PEP 8)
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.format]
+# Use double quotes to be consistent with Black
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+# E: pycodestyle, F: Pyflakes, I: isort (auto-sort imports)
+select = ["E", "F", "I"]

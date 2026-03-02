@@ -4,3 +4,5 @@ __pycache__/
 *.class
 .env
 .DS_Store
+.venv/
+uv.lock

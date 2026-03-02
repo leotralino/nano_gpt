@@ -1,3 +1,5 @@
+import logging
+
 import requests
 import torch
 
@@ -6,7 +8,6 @@ from nanogpt.utils import setup_logging
 
 setup_logging()
 
-import logging
 
 logger = logging.getLogger(__name__)
 

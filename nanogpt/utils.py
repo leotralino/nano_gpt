@@ -1,6 +1,6 @@
 # utils.py
-import logging
 import sys
+import logging
 
 
 def setup_logging():

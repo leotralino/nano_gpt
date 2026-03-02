@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
-
-
 import torch
+
+
 class BaseTokenizer(ABC):
     @abstractmethod
     def encode(self, s: str) -> torch.Tensor:

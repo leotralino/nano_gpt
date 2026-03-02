@@ -1,5 +1,6 @@
-import torch
 from abc import ABC, abstractmethod
+
+import torch
 
 
 class BaseTokenizer(ABC):
@@ -14,7 +15,6 @@ class BaseTokenizer(ABC):
 
 class CharTokenizer(BaseTokenizer):
     def __init__(self, full_text: str):
-
         chars = sorted(set(full_text))
 
         self.char_to_idx = {}
@@ -38,7 +38,7 @@ class CharTokenizer(BaseTokenizer):
     def add_extra_char(self, s: str):
         if s in self.char_to_idx:
             return
-        
+
         curr_size = self.n_vocab
         self.char_to_idx[s] = curr_size
         self.idx_to_char[curr_size] = s

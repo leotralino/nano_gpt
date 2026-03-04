@@ -51,7 +51,10 @@ if __name__ == "__main__":
         loss.backward()
         optimizer.step()
 
+        if step % 500 == 0:
+            out = approximate_loss(bpe, dl)
+            logger.info(f"Step {step}; Approximated loss: {out}")
+
     output = bpe.generate(torch.tensor([[55], [49], [35]], dtype=torch.long), 100)
     out_s = [tokenizer.decode(i) for i in output]
-    for i in out_s:
-        print(i)
+    logger.info(f"Sample generation:\n-------\n{''.join(out_s)}\n-------")

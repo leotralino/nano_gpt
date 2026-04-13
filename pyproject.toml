@@ -30,8 +30,7 @@ dev = [
 default-groups = ["dev"]
 
 [tool.ruff]
-# Match Karpathy's style (and PEP 8)
-line-length = 88
+line-length = 120
 target-version = "py312"
 
 [tool.ruff.format]

@@ -29,19 +29,11 @@ class SelfAttention(nn.Module):
     def __init__(self, head_size):
         super().__init__()
 
-        self.key = nn.Linear(
-            in_features=CONFIG["n_embed"], out_features=head_size, bias=False
-        )
-        self.query = nn.Linear(
-            in_features=CONFIG["n_embed"], out_features=head_size, bias=False
-        )
-        self.value = nn.Linear(
-            in_features=CONFIG["n_embed"], out_features=head_size, bias=False
-        )
+        self.key = nn.Linear(in_features=CONFIG["n_embed"], out_features=head_size, bias=False)
+        self.query = nn.Linear(in_features=CONFIG["n_embed"], out_features=head_size, bias=False)
+        self.value = nn.Linear(in_features=CONFIG["n_embed"], out_features=head_size, bias=False)
 
-        self.register_buffer(
-            "tril", torch.tril(torch.ones(CONFIG["block_size"], CONFIG["batch_size"]))
-        )
+        self.register_buffer("tril", torch.tril(torch.ones(CONFIG["block_size"], CONFIG["batch_size"])))
         self.dropout = nn.Dropout(CONFIG["dropout"])
 
     def forward(self, x):
@@ -54,9 +46,7 @@ class SelfAttention(nn.Module):
         q = self.query(x)  # (B, T, hs)
         v = self.value(x)  # (B, T, hs)
 
-        wei = (
-            q @ k.transpose(-2, -1) / torch.sqrt(C)
-        )  # (B, T, hs) @ (B, hs, T) -> (B, T, T)
+        wei = q @ k.transpose(-2, -1) / torch.sqrt(C)  # (B, T, hs) @ (B, hs, T) -> (B, T, T)
         wei = wei.masked_fill(torch.tril[:T, :T] == 0, float("-inf"))  # (B, T, T)
         wei = F.softmax(wei, dim=-1)  # (B, T, T)
         wei = self.dropout(wei)
@@ -83,9 +73,7 @@ class FeedForward(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(n_embed, 4 * n_embed),  # 4 comes from attention paper
             nn.ReLU(),
-            nn.Linear(
-                4 * n_embed, n_embed
-            ),  # projection layer (for residual connection)
+            nn.Linear(4 * n_embed, n_embed),  # projection layer (for residual connection)
             nn.Dropout(CONFIG["dropout"]),
         )
 
